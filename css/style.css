@@ -133,7 +133,7 @@ form .form-control {
 .contact-info {
     background-color: rgba(0, 0, 0, 0.5);
     /* Félátlátszó fekete háttér */
-    color: white;
+    color: rgba(87, 84, 84, 0.44);
     padding: 40px 0;
     text-align: center;
 }
@@ -189,7 +189,7 @@ form .form-control {
 /* Elérhetőségek szürke sáv */
 
 .contact-info {
-    background-color: #514f4f;
+    background-color: #27262655;
     padding: 40px 0;
 }
 
