@@ -311,7 +311,6 @@
     </div>
 
     <script>
-        // Szűrés márka szerint
         function searchTable() {
             const input = document.getElementById("searchInput").value.toLowerCase();
             const rows = document.querySelectorAll("#carTable tbody tr");
@@ -322,10 +321,10 @@
             });
         }
 
-        // Rendezés bármely oszlop szerint
+
         function sortTable(colIndex) {
             const table = document.getElementById("carTable");
-            const rows = Array.from(table.rows).slice(1); // kihagyjuk a fejlécet
+            const rows = Array.from(table.rows).slice(1);
             const isNumeric = colIndex >= 2;
 
             rows.sort((a, b) => {
@@ -344,7 +343,7 @@
             rows.forEach(row => table.tBodies[0].appendChild(row));
         }
 
-        // Képek elrejtése/megjelenítése
+
         function toggleImages() {
             const imgSection = document.getElementById("carImages");
             imgSection.style.display = imgSection.style.display === "none" ? "flex" : "none";
