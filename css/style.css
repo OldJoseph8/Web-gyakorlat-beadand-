@@ -217,3 +217,13 @@ form .form-control {
         font-size: 1rem;
     }
 }
+
+.image-block img {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info {
+    background-color: #4c4c4cc9;
+    color: white;
+}
