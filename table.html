@@ -6,12 +6,28 @@
     <title>Táblázat</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        /* Fixált fejléc görgetéshez */
+        
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #f8f9fa;
+            z-index: 1;
+        }
+        
+        .equal-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Weboldalam</a>
+            <a class="navbar-brand" href="index.html">SmithCar</a>
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="about.html">Rólunk</a></li>
@@ -22,9 +38,14 @@
             </div>
         </div>
     </nav>
+
     <div class="container mt-4">
-        <!-- Képek sorban -->
-        <div class="row mb-4">
+
+        <div class="text-end mb-2">
+            <button class="btn btn-outline-primary btn-sm" onclick="toggleImages()">Képek mutatása/elrejtése</button>
+        </div>
+
+        <div id="carImages" class="row mb-4">
             <div class="col-md-4">
                 <img src="images/audi.jpeg" class="equal-img" alt="Audi" />
             </div>
@@ -36,245 +57,299 @@
             </div>
         </div>
 
-        <!-- A táblázat kezdete -->
-        <table class="table table-bordered">
-            <thead>
-                ...
-            </thead>
-            <p class="text-center"> Kereskedésünkből azonnal elvihető gépjárművek listája és leírása.</p>
+        <div class="mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Keresés márka szerint..." onkeyup="searchTable()">
+        </div>
 
-            <thead>
-                <tr>
-                    <th>Márka</th>
-                    <th>Típus</th>
-                    <th>Évjárat</th>
-                    <th>Felszereltség</th>
-                    <th>Futott kilométer</th>
-                    <th>Készlet</th>
-                    <th>Ára</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mercedes</td>
-                    <td>C 220d</td>
-                    <td>2021</td>
-                    <td>AMG Line</td>
-                    <td>45 000 km</td>
-                    <td>3 db</td>
-                    <td>13 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Mercedes</td>
-                    <td>GLA 200</td>
-                    <td>2023</td>
-                    <td>Progressive</td>
-                    <td>12 000 km</td>
-                    <td>2 db</td>
-                    <td>15 490 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Mercedes</td>
-                    <td>E 300e</td>
-                    <td>2022</td>
-                    <td>Avantgarde</td>
-                    <td>28 000 km</td>
-                    <td>1 db</td>
-                    <td>19 900 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Mercedes</td>
-                    <td>CLA 180</td>
-                    <td>2020</td>
-                    <td>Style</td>
-                    <td>63 000 km</td>
-                    <td>4 db</td>
-                    <td>10 990 000 Ft</td>
-                </tr>
+        <p class="text-center fw-bold bg-light py-2">Kereskedésünkből azonnal elvihető gépjárművek listája és leírása.</p>
 
-                <tr>
-                    <td>Audi</td>
-                    <td>A4 2.0 TDI</td>
-                    <td>2020</td>
-                    <td>S Line</td>
-                    <td>58 000 km</td>
-                    <td>5 db</td>
-                    <td>11 490 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Audi</td>
-                    <td>Q3 35 TFSI</td>
-                    <td>2022</td>
-                    <td>Advanced</td>
-                    <td>25 000 km</td>
-                    <td>3 db</td>
-                    <td>13 590 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Audi</td>
-                    <td>A6 40 TDI</td>
-                    <td>2019</td>
-                    <td>Business</td>
-                    <td>75 000 km</td>
-                    <td>2 db</td>
-                    <td>12 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Audi</td>
-                    <td>Q5 45 TFSI</td>
-                    <td>2023</td>
-                    <td>S Line</td>
-                    <td>9 000 km</td>
-                    <td>1 db</td>
-                    <td>19 490 000 Ft</td>
-                </tr>
+        <div class="table-responsive">
+            <table id="carTable" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Márka</th>
+                        <th onclick="sortTable(1)">Típus</th>
+                        <th onclick="sortTable(2)">Évjárat</th>
+                        <th>Felszereltség</th>
+                        <th onclick="sortTable(4)">Futott km</th>
+                        <th onclick="sortTable(5)">Készlet</th>
+                        <th onclick="sortTable(6)">Ár</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mercedes</td>
+                        <td>C 220d</td>
+                        <td>2021</td>
+                        <td>AMG Line</td>
+                        <td>45 000 km</td>
+                        <td>3 db</td>
+                        <td>13 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Mercedes</td>
+                        <td>GLA 200</td>
+                        <td>2023</td>
+                        <td>Progressive</td>
+                        <td>12 000 km</td>
+                        <td>2 db</td>
+                        <td>15 490 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Mercedes</td>
+                        <td>E 300e</td>
+                        <td>2022</td>
+                        <td>Avantgarde</td>
+                        <td>28 000 km</td>
+                        <td>1 db</td>
+                        <td>19 900 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Mercedes</td>
+                        <td>CLA 180</td>
+                        <td>2020</td>
+                        <td>Style</td>
+                        <td>63 000 km</td>
+                        <td>4 db</td>
+                        <td>10 990 000 Ft</td>
+                    </tr>
 
-                <tr>
-                    <td>Ford</td>
-                    <td>Focus 1.5 EcoBoost</td>
-                    <td>2019</td>
-                    <td>Titanium</td>
-                    <td>72 000 km</td>
-                    <td>4 db</td>
-                    <td>5 290 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Ford</td>
-                    <td>Kuga 2.5 Hybrid</td>
-                    <td>2021</td>
-                    <td>ST-Line</td>
-                    <td>50 000 km</td>
-                    <td>4 db</td>
-                    <td>9 790 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Ford</td>
-                    <td>Puma 1.0 EcoBoost</td>
-                    <td>2022</td>
-                    <td>ST-Line X</td>
-                    <td>18 000 km</td>
-                    <td>3 db</td>
-                    <td>7 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Ford</td>
-                    <td>Mondeo 2.0 Hybrid</td>
-                    <td>2020</td>
-                    <td>Vignale</td>
-                    <td>66 000 km</td>
-                    <td>1 db</td>
-                    <td>8 490 000 Ft</td>
-                </tr>
+                    <tr>
+                        <td>Audi</td>
+                        <td>A4 2.0 TDI</td>
+                        <td>2020</td>
+                        <td>S Line</td>
+                        <td>58 000 km</td>
+                        <td>5 db</td>
+                        <td>11 490 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Audi</td>
+                        <td>Q3 35 TFSI</td>
+                        <td>2022</td>
+                        <td>Advanced</td>
+                        <td>25 000 km</td>
+                        <td>3 db</td>
+                        <td>13 590 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Audi</td>
+                        <td>A6 40 TDI</td>
+                        <td>2019</td>
+                        <td>Business</td>
+                        <td>75 000 km</td>
+                        <td>2 db</td>
+                        <td>12 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Audi</td>
+                        <td>Q5 45 TFSI</td>
+                        <td>2023</td>
+                        <td>S Line</td>
+                        <td>9 000 km</td>
+                        <td>1 db</td>
+                        <td>19 490 000 Ft</td>
+                    </tr>
 
-                <tr>
-                    <td>Toyota</td>
-                    <td>Corolla 1.8 Hybrid</td>
-                    <td>2022</td>
-                    <td>Executive</td>
-                    <td>30 000 km</td>
-                    <td>2 db</td>
-                    <td>8 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Toyota</td>
-                    <td>Yaris Cross</td>
-                    <td>2023</td>
-                    <td>Style</td>
-                    <td>10 000 km</td>
-                    <td>3 db</td>
-                    <td>9 490 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Toyota</td>
-                    <td>C-HR 2.0 Hybrid</td>
-                    <td>2021</td>
-                    <td>GR Sport</td>
-                    <td>35 000 km</td>
-                    <td>2 db</td>
-                    <td>10 490 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Toyota</td>
-                    <td>RAV4 Hybrid AWD</td>
-                    <td>2020</td>
-                    <td>Style Plus</td>
-                    <td>64 000 km</td>
-                    <td>1 db</td>
-                    <td>11 990 000 Ft</td>
-                </tr>
+                    <tr>
+                        <td>Ford</td>
+                        <td>Focus 1.5 EcoBoost</td>
+                        <td>2019</td>
+                        <td>Titanium</td>
+                        <td>72 000 km</td>
+                        <td>4 db</td>
+                        <td>5 290 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Ford</td>
+                        <td>Kuga 2.5 Hybrid</td>
+                        <td>2021</td>
+                        <td>ST-Line</td>
+                        <td>50 000 km</td>
+                        <td>4 db</td>
+                        <td>9 790 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Ford</td>
+                        <td>Puma 1.0 EcoBoost</td>
+                        <td>2022</td>
+                        <td>ST-Line X</td>
+                        <td>18 000 km</td>
+                        <td>3 db</td>
+                        <td>7 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Ford</td>
+                        <td>Mondeo 2.0 Hybrid</td>
+                        <td>2020</td>
+                        <td>Vignale</td>
+                        <td>66 000 km</td>
+                        <td>1 db</td>
+                        <td>8 490 000 Ft</td>
+                    </tr>
 
-                <tr>
-                    <td>Lexus</td>
-                    <td>NX 300h</td>
-                    <td>2021</td>
-                    <td>Luxury</td>
-                    <td>40 000 km</td>
-                    <td>1 db</td>
-                    <td>15 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Lexus</td>
-                    <td>RX 500h</td>
-                    <td>2023</td>
-                    <td>F Sport</td>
-                    <td>5 000 km</td>
-                    <td>1 db</td>
-                    <td>27 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Lexus</td>
-                    <td>ES 300h</td>
-                    <td>2022</td>
-                    <td>Executive</td>
-                    <td>22 000 km</td>
-                    <td>2 db</td>
-                    <td>18 490 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Lexus</td>
-                    <td>UX 250h</td>
-                    <td>2021</td>
-                    <td>Business</td>
-                    <td>34 000 km</td>
-                    <td>3 db</td>
-                    <td>11 990 000 Ft</td>
-                </tr>
+                    <tr>
+                        <td>Toyota</td>
+                        <td>Corolla 1.8 Hybrid</td>
+                        <td>2022</td>
+                        <td>Executive</td>
+                        <td>30 000 km</td>
+                        <td>2 db</td>
+                        <td>8 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Toyota</td>
+                        <td>Yaris Cross</td>
+                        <td>2023</td>
+                        <td>Style</td>
+                        <td>10 000 km</td>
+                        <td>3 db</td>
+                        <td>9 490 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Toyota</td>
+                        <td>C-HR 2.0 Hybrid</td>
+                        <td>2021</td>
+                        <td>GR Sport</td>
+                        <td>35 000 km</td>
+                        <td>2 db</td>
+                        <td>10 490 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Toyota</td>
+                        <td>RAV4 Hybrid AWD</td>
+                        <td>2020</td>
+                        <td>Style Plus</td>
+                        <td>64 000 km</td>
+                        <td>1 db</td>
+                        <td>11 990 000 Ft</td>
+                    </tr>
 
-                <tr>
-                    <td>Alfa Romeo</td>
-                    <td>Giulia 2.2 Diesel</td>
-                    <td>2018</td>
-                    <td>Super</td>
-                    <td>84 000 km</td>
-                    <td>2 db</td>
-                    <td>6 790 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Alfa Romeo</td>
-                    <td>Stelvio 2.0T</td>
-                    <td>2020</td>
-                    <td>Veloce</td>
-                    <td>60 000 km</td>
-                    <td>2 db</td>
-                    <td>12 490 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Alfa Romeo</td>
-                    <td>Tonale Hybrid</td>
-                    <td>2023</td>
-                    <td>Ti</td>
-                    <td>7 000 km</td>
-                    <td>1 db</td>
-                    <td>14 990 000 Ft</td>
-                </tr>
-                <tr>
-                    <td>Alfa Romeo</td>
-                    <td>MiTo 0.9 Turbo</td>
-                    <td>2017</td>
-                    <td>Distinctive</td>
-                    <td>98 000 km</td>
-                    <td>2 db</td>
-                    <td>3 990 000 Ft</td>
-                </tr>
+                    <tr>
+                        <td>Lexus</td>
+                        <td>NX 300h</td>
+                        <td>2021</td>
+                        <td>Luxury</td>
+                        <td>40 000 km</td>
+                        <td>1 db</td>
+                        <td>15 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Lexus</td>
+                        <td>RX 500h</td>
+                        <td>2023</td>
+                        <td>F Sport</td>
+                        <td>5 000 km</td>
+                        <td>1 db</td>
+                        <td>27 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Lexus</td>
+                        <td>ES 300h</td>
+                        <td>2022</td>
+                        <td>Executive</td>
+                        <td>22 000 km</td>
+                        <td>2 db</td>
+                        <td>18 490 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Lexus</td>
+                        <td>UX 250h</td>
+                        <td>2021</td>
+                        <td>Business</td>
+                        <td>34 000 km</td>
+                        <td>3 db</td>
+                        <td>11 990 000 Ft</td>
+                    </tr>
+
+                    <tr>
+                        <td>Alfa Romeo</td>
+                        <td>Giulia 2.2 Diesel</td>
+                        <td>2018</td>
+                        <td>Super</td>
+                        <td>84 000 km</td>
+                        <td>2 db</td>
+                        <td>6 790 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Alfa Romeo</td>
+                        <td>Stelvio 2.0T</td>
+                        <td>2020</td>
+                        <td>Veloce</td>
+                        <td>60 000 km</td>
+                        <td>2 db</td>
+                        <td>12 490 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Alfa Romeo</td>
+                        <td>Tonale Hybrid</td>
+                        <td>2023</td>
+                        <td>Ti</td>
+                        <td>7 000 km</td>
+                        <td>1 db</td>
+                        <td>14 990 000 Ft</td>
+                    </tr>
+                    <tr>
+                        <td>Alfa Romeo</td>
+                        <td>MiTo 0.9 Turbo</td>
+                        <td>2017</td>
+                        <td>Distinctive</td>
+                        <td>98 000 km</td>
+                        <td>2 db</td>
+                        <td>3 990 000 Ft</td>
+                    </tr>
+                </tbody>
+            </table>
+
             </tbody>
-        </table>
+            </table>
+        </div>
+    </div>
+    </tbody>
+    </table>
+    </div>
+    </div>
+
+    <script>
+        // Szűrés márka szerint
+        function searchTable() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("#carTable tbody tr");
+
+            rows.forEach(row => {
+                const brand = row.cells[0].textContent.toLowerCase();
+                row.style.display = brand.includes(input) ? "" : "none";
+            });
+        }
+
+        // Rendezés bármely oszlop szerint
+        function sortTable(colIndex) {
+            const table = document.getElementById("carTable");
+            const rows = Array.from(table.rows).slice(1); // kihagyjuk a fejlécet
+            const isNumeric = colIndex >= 2;
+
+            rows.sort((a, b) => {
+                let x = a.cells[colIndex].textContent.replace(/\D/g, "");
+                let y = b.cells[colIndex].textContent.replace(/\D/g, "");
+
+                if (!isNumeric) {
+                    x = a.cells[colIndex].textContent.toLowerCase();
+                    y = b.cells[colIndex].textContent.toLowerCase();
+                    return x.localeCompare(y);
+                } else {
+                    return Number(x) - Number(y);
+                }
+            });
+
+            rows.forEach(row => table.tBodies[0].appendChild(row));
+        }
+
+        // Képek elrejtése/megjelenítése
+        function toggleImages() {
+            const imgSection = document.getElementById("carImages");
+            imgSection.style.display = imgSection.style.display === "none" ? "flex" : "none";
+        }
+    </script>
+</body>
+
+</html>

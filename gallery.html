@@ -7,12 +7,26 @@
     <title>Galéria</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css" rel="stylesheet">
+    <style>
+        .custom-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+        }
+        
+        .custom-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="gallery.html">Weboldalam</a>
+            <a class="navbar-brand" href="gallery.html">SmithCar</a>
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="about.html">Rólunk</a></li>
@@ -23,104 +37,139 @@
             </div>
         </div>
     </nav>
+
     <div class="container mt-4">
         <h1>Galéria oldal</h1>
-        <div class="container mt-4">
-            <p class="text-center"> Kereskedében megtalálható legjellemzőbb gépjárműveink.</p>
+        <div class="container mt-4 text-center">
+            <p class="fw-bold py-2 px-3 d-inline-block" style="background-color: #f1f1f1; border-radius: 8px;">
+                Kereskedésünkben megtalálható legjellemzőbb gépjárműveink.
+            </p>
+        </div>
 
-            <div class="row mb-4">
-                <!-- Bal oldali kép -->
-                <div class="col-md-6">
-                    <div class="img-container">
-                        <img src="/images/audi.jpeg" class="custom-img" alt="Audi" />
-                        <p>Az Audi a német prémium csúcsa, készletünk büszkélkedhet, rengeteg különböző modellel.</p>
-                    </div>
-                </div>
-
-                <!-- Jobb oldali kép -->
-                <div class="col-md-6">
-                    <div class="img-container">
-                        <img src="/images/audi-logo.webp" class="custom-img" alt="Ford" />
-
-                    </div>
-                </div>
+        <!-- Autók -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <a href="/images/audi.jpeg" data-lightbox="gallery" data-title="Audi">
+                    <img src="/images/audi.jpeg" class="custom-img" alt="Audi" />
+                </a>
+                <p>Az Audi a német prémium csúcsa, készletünk büszkélkedhet rengeteg különböző modellel.</p>
             </div>
-
-            <<div class="row mb-4">
-                <!-- Bal oldali kép -->
-                <div class="col-md-6">
-                    <div class="img-container">
-                        <img src="/images/ford.jpg" class="custom-img" alt="Audi" />
-                        <p>Ford modeljeink a megbízhatóság és a fentarthatóság remek példája, készletünk napról napra több és változatosabb modelekkel bővül.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Jobb oldali kép -->
-                <div class="col-md-6">
-                    <div class="img-container">
-                        <img src="/images/Ford_logo.jpg" class="custom-img" alt="Ford" />
-
-                    </div>
-                </div>
+            <div class="col-md-6">
+                <a href="/images/audi-logo.webp" data-lightbox="gallery" data-title="Audi logó">
+                    <img src="/images/audi-logo.webp" class="custom-img" alt="Audi logó" />
+                </a>
+            </div>
         </div>
 
         <div class="row mb-4">
-            <!-- Bal oldali kép -->
             <div class="col-md-6">
-                <div class="img-container">
-                    <img src="/images/lexus.webp" class="custom-img" alt="Audi" />
-                    <p>Lexus a japán elegancia csúcsa, kereskedésünkben limitált darabszában érhetőek el.</p>
-                </div>
+                <a href="/images/ford.jpg" data-lightbox="gallery" data-title="Ford">
+                    <img src="/images/ford.jpg" class="custom-img" alt="Ford" />
+                </a>
+                <p>Ford modelleink a megbízhatóság és fenntarthatóság remek példái.</p>
             </div>
-
-            <!-- Jobb oldali kép -->
             <div class="col-md-6">
-                <div class="img-container">
-                    <img src="/images/lexus logo.jpeg" class="custom-img" alt="Ford" />
-
-                </div>
+                <a href="/images/Ford_logo.jpg" data-lightbox="gallery" data-title="Ford logó">
+                    <img src="/images/Ford_logo.jpg" class="custom-img" alt="Ford logó" />
+                </a>
             </div>
         </div>
 
-        <<div class="row mb-4">
-            <!-- Bal oldali kép -->
+        <div class="row mb-4">
             <div class="col-md-6">
-                <div class="img-container">
-                    <img src="/images/mercedes.jpg" class="custom-img" alt="Audi" />
-                    <p>Mercedes-Benz típusú képjárművek széles válaszatéka várja önöket, több mint 40 féle különböző típusban.</p>
-                </div>
+                <a href="/images/lexus.webp" data-lightbox="gallery" data-title="Lexus">
+                    <img src="/images/lexus.webp" class="custom-img" alt="Lexus" />
+                </a>
+                <p>Lexus a japán elegancia csúcsa, kereskedésünkben limitált darabszámban érhető el.</p>
             </div>
-
-            <!-- Jobb oldali kép -->
             <div class="col-md-6">
-                <div class="img-container">
-                    <img src="/images/mercedes logo.jpg" class="custom-img" alt="Ford" />
-
-                </div>
+                <a href="/images/lexus logo.jpeg" data-lightbox="gallery" data-title="Lexus logó">
+                    <img src="/images/lexus logo.jpeg" class="custom-img" alt="Lexus logó" />
+                </a>
             </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <a href="/images/mercedes.jpg" data-lightbox="gallery" data-title="Mercedes-Benz">
+                    <img src="/images/mercedes.jpg" class="custom-img" alt="Mercedes-Benz" />
+                </a>
+                <p>Mercedes-Benz típusú gépjárművek széles választéka várja Önöket.</p>
+            </div>
+            <div class="col-md-6">
+                <a href="/images/mercedes logo.jpg" data-lightbox="gallery" data-title="Mercedes logó">
+                    <img src="/images/mercedes logo.jpg" class="custom-img" alt="Mercedes logó" />
+                </a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <a href="/images/alfa.jpg" data-lightbox="gallery" data-title="Alfa Romeo">
+                    <img src="/images/alfa.jpg" class="custom-img" alt="Alfa Romeo" />
+                </a>
+                <p>Olasz minőség, igazi életérzés az Alfa Romeo modellekkel.</p>
+            </div>
+            <div class="col-md-6">
+                <a href="/images/alfa logo.jpg" data-lightbox="gallery" data-title="Alfa logó">
+                    <img src="/images/alfa logo.jpg" class="custom-img" alt="Alfa logó" />
+                </a>
+            </div>
+        </div>
+
+        <!-- Extra képek -->
+        <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+                <a href="/images/kereskedés.jpeg" data-lightbox="gallery" data-title="Kereskedés">
+                    <img src="/images/kereskedés.jpeg" class="img-fluid" alt="Kereskedés" />
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="/images/pár autó.jpg" data-lightbox="gallery" data-title="Pár autó">
+                    <img src="/images/pár autó.jpg" class="img-fluid" alt="Pár autó" />
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="/images/autók.jpg" data-lightbox="gallery" data-title="Autók">
+                    <img src="/images/autók.jpg" class="img-fluid" alt="Autók" />
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+                <a href="/images/cabrio.jpg" data-lightbox="gallery" data-title="Cabrio">
+                    <img src="/images/cabrio.jpg" class="img-fluid" alt="Cabrio" />
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="/images/belső.jpg" data-lightbox="gallery" data-title="Belső tér">
+                    <img src="/images/belső.jpg" class="img-fluid" alt="Belső tér" />
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="/images/3 autó.jpg" data-lightbox="gallery" data-title="Három autó">
+                    <img src="/images/3 autó.jpg" class="img-fluid" alt="Három autó" />
+                </a>
+            </div>
+        </div>
+
+        <div class="container mt-4 text-center">
+            <p class="fw-bold py-3 px-4 d-inline-block" style="background-color: #f1f1f1; border-radius: 8px; max-width: 800px;">
+                Galériában a kereskedés legkelendőbb, valamint legnagyobb darabszámban tartott gépjárműveit gyűjtöttük össze. A kínálat folyamatosan bővül – további képekért keresse kollegáinkat!
+            </p>
+        </div>
     </div>
 
-    <<div class="row mb-4">
-        <!-- Bal oldali kép -->
-        <div class="col-md-6">
-            <div class="img-container">
-                <img src="/images/alfa.jpg" class="custom-img" alt="Alfa Romeo" />
-                <p>Olasz magas minőség, igazi életérzés az Alfa Romeo modellek közül több mint 9 darab található meg állandó jelleggel kínálatunkban.</p>
-            </div>
-        </div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; <span id="year"></span> SmithCar | Minden jog fenntartva.</p>
+    </footer>
 
-        <!-- Jobb oldali kép -->
-        <div class="col-md-6">
-            <div class="img-container">
-                <img src="/images/alfa logo.jpg" class="custom-img" alt="Ford" />
-
-            </div>
-        </div>
-        </div>
-        <p class="text-center"> Galériában a kereskedés legkelendőbb, illetve a legnygobb darabszámban tartott, Német, olasz valamint, Amerikai és Japán gyártmányű gépjárműveit gyűjtöttük össze. Ezeken felül található még számos közép kategóriás gépjármű a kínálatunkabn, mint
-            például az Opel, Volkswagen, valamint a Toyota. További képekért és információkért keressék meg kolegánkat a megadott elérhetőségeken vagy keressék fel személyesen telephelyünket.</p>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>
